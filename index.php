@@ -28,7 +28,7 @@ fclose($csvfile);
 // Get the selected products
 $selected_products = [];
 
-foreach ($worksheet->getRange('A23:B42') as $row) {
+foreach ($worksheet->getCell('A23:B42') as $row) {
     $product_id = $row['A'];
     $product_name = $row['B'];
     $product_quantity = $row['F'];
@@ -47,37 +47,37 @@ foreach ($worksheet->getRange('A23:B42') as $row) {
 $total_price = array_sum(array_column($selected_products, 'total_price'));
 
 // Write the invoice data to the Excel file
-$worksheet->getRange('A13')->setValue($invoice_number);
-$worksheet->getRange('A14')->setValue($invoice_date);
-$worksheet->getRange('A15')->setValue($lpo_number);
-$worksheet->getRange('E15')->setValue($lpo_date);
-$worksheet->getRange('A17')->setValue($company_name);
-$worksheet->getRange('A18')->setValue($customer_name);
-$worksheet->getRange('A19')->setValue($cr_number);
-$worksheet->getRange('A20')->setValue($vatreg_number);
-$worksheet->getRange('J14')->setValue($salesman);
-$worksheet->getRange('J17')->setValue($contact_person);
-$worksheet->getRange('J18')->setValue($designation);
-$worksheet->getRange('J19')->setValue($contact_number);
-$worksheet->getRange('J20')->setValue($omanID);
+$worksheet->getCell('A13')->setValue($invoice_number);
+$worksheet->getCell('A14')->setValue($invoice_date);
+$worksheet->getCell('A15')->setValue($lpo_number);
+$worksheet->getCell('E15')->setValue($lpo_date);
+$worksheet->getCell('A17')->setValue($company_name);
+$worksheet->getCell('A18')->setValue($customer_name);
+$worksheet->getCell('A19')->setValue($cr_number);
+$worksheet->getCell('A20')->setValue($vatreg_number);
+$worksheet->getCell('J14')->setValue($salesman);
+$worksheet->getCell('J17')->setValue($contact_person);
+$worksheet->getCell('J18')->setValue($designation);
+$worksheet->getCell('J19')->setValue($contact_number);
+$worksheet->getCell('J20')->setValue($omanID);
 
 foreach ($selected_products as $product) {
     $row = $product['serial_number'] + 23;
-    $worksheet->getRange('A' . $row)->setValue($product['serial_number']);
-    $worksheet->getRange('B' . $row)->setValue($product['number']);
-    $worksheet->getRange('C' . $row)->setValue($product['name']);
-    $worksheet->getRange('D' . $row)->setValue($product['hs']);
-    $worksheet->getRange('E' . $row)->setValue($product['packing']);
-    $worksheet->getRange('F' . $row)->setValue($product['quantity']);
-    $worksheet->getRange('G' . $row)->setValue($product['price']);
-    $worksheet->getRange('H' . $row)->setValue($product['total_price']);
-    $worksheet->getRange('I' . $row)->setValue($product['vat']);
-    $worksheet->getRange('J' . $row)->setValue($product['sum_price']);
-    $worksheet->getRange('I42' . $row)->setValue($product['total_price']);
-    $worksheet->getRange('J42' . $row)->setValue($product['vat']);
+    $worksheet->getCell('A' . $row)->setValue($product['serial_number']);
+    $worksheet->getCell('B' . $row)->setValue($product['number']);
+    $worksheet->getCell('C' . $row)->setValue($product['name']);
+    $worksheet->getCell('D' . $row)->setValue($product['hs']);
+    $worksheet->getCell('E' . $row)->setValue($product['packing']);
+    $worksheet->getCell('F' . $row)->setValue($product['quantity']);
+    $worksheet->getCell('G' . $row)->setValue($product['price']);
+    $worksheet->getCell('H' . $row)->setValue($product['total_price']);
+    $worksheet->getCell('I' . $row)->setValue($product['vat']);
+    $worksheet->getCell('J' . $row)->setValue($product['sum_price']);
+    $worksheet->getCell('I42' . $row)->setValue($product['total_price']);
+    $worksheet->getCell('J42' . $row)->setValue($product['vat']);
 }
 
-$worksheet->getRange('J36')->setValue($total_price);
+$worksheet->getCell('J36')->setValue($total_price);
 
 // Save the invoice file
 $writer = new Xlsx($invoice_template);
